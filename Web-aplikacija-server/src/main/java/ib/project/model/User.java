@@ -1,5 +1,9 @@
 package ib.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.repository.cdi.Eager;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +17,8 @@ public class User {
     private String password;
     private String certificate;
     private Boolean active;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.EAGER)
     private Authority authority;
 
     public User() {
