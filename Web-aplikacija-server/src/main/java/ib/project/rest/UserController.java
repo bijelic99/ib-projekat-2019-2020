@@ -58,6 +58,7 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public ResponseEntity<User> login(@RequestBody User user){
+        System.out.println("ovde");
         Optional<User> optionalUser = userService.getUser(user.getEmail(), user.    getPassword());
         if(optionalUser.isPresent()){
             return ResponseEntity.ok(optionalUser.get());

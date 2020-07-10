@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import axios from '../axios'
+import axios, { addAuthTokenInterceptor } from '../axios'
 export default {
     name: 'Login',
     data: function(){
@@ -19,9 +19,10 @@ export default {
     },
     methods: {
         login: function() {
-            axios.post('/users/login', { email: this.username, password: this.password}).then(({data})=>{
+            axios.post('/users/login', { email: this.username, password: this.password}).then(async ({data})=>{
                 this.user = data
                 alert("Uspesan login")
+                addAuthTokenInterceptor(data.email, data.password)
                 this.$router.push({name:"Home", params:{
                     user: this.user
                 }})
